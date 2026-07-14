@@ -1,0 +1,60 @@
+% NMBU Beamer Theme
+%
+% Description:
+%   A Beamer template consistent with NMBU graphical profile
+%
+% URL: https://design.nmbu.no/artikler/node/2970
+%
+% Author: Erlend Dancke Sandorf
+%
+% Based on: Beamer-NMBU by Eivysaur (https://github.com/Eivysaur/Beamer-NMBU) 
+\mode<presentation>
+
+% ----
+% BACKGROUND
+% ----
+% Background hook, currently just a bounding box. Extend inside the tikzpicture
+% if a per-slide background/watermark is ever needed.
+\setbeamertemplate{background}{
+    \begin{tikzpicture}
+        \useasboundingbox (0, 0) rectangle(\the\paperwidth, \the\paperheight);
+    \end{tikzpicture}
+}
+
+% ----
+% TITLEPAGE
+% ----
+\defbeamertemplate*{title page}{NMBU}[1][]{
+    \begingroup
+        \centering
+        \vskip1em
+        \begin{beamercolorbox}[rounded = true, sep = 5pt]{title page header}
+            \usebeamerfont{title}\centering\textbf{\inserttitle}\par%
+            \ifx\insertsubtitle\@empty%
+            \else%
+                \vskip0.25em%
+                {\usebeamerfont{subtitle}\insertsubtitle\par}%
+            \fi%
+        \end{beamercolorbox}     
+        
+        \vskip1em\par
+        
+        \begin{beamercolorbox}[sep = 5pt]{author}
+            \usebeamerfont{author} \centering\normalsize\insertauthor%
+        \end{beamercolorbox}
+      
+        \begin{beamercolorbox}[sep = 5pt]{institute}
+            \usebeamerfont{institute}\centering\tiny\insertinstitute
+        \end{beamercolorbox}
+        
+        \begin{beamercolorbox}[sep = 5pt]{date}
+            \usebeamerfont{author}\centering\scriptsize\insertdate
+        \end{beamercolorbox}\vskip0.5em
+    \endgroup
+    
+    \vfill
+}
+
+\mode<all>
+
+

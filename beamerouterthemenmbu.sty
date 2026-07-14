@@ -1,0 +1,71 @@
+% NMBU Beamer Theme
+%
+% Description:
+%   A Beamer template consistent with NMBU graphical profile
+%
+% URL: https://design.nmbu.no/artikler/node/2970
+%
+% Author: Erlend Dancke Sandorf
+%
+% Based on: Beamer-NMBU by Eivysaur (https://github.com/Eivysaur/Beamer-NMBU)
+\mode<presentation>
+  
+% ----
+% FRAMETITLE
+% ----
+%\defbeamertemplate*{frametitle}{NMBU}[1][]{
+%  \begin{beamercolorbox}[wd = .85\paperwidth]{frametitle}
+%    \vskip.75ex
+%    \insertframetitle
+%  \end{beamercolorbox}
+%}
+
+% ----
+% FOOTLINE
+% ----
+% Define the progressbar
+\def\progressbar@progressbar{}
+\newcount\progressbar@tmpcounta
+\newcount\progressbar@tmpcountb
+\newdimen\progressbar@pbht 		%	height of the progressbar
+\newdimen\progressbar@pbwd 		%	width of the progressbar
+\newdimen\progressbar@rcircle 	% 	Radius for the circle
+\newdimen\progressbar@tmpdim		%	auxiliary dimension
+
+\progressbar@pbwd = .95\paperwidth
+\progressbar@pbht = 0.2ex
+
+%	Now we create the progressbar
+\def\progressbar@progressbar{ %
+    \progressbar@tmpcounta = \insertframenumber
+	\progressbar@tmpcountb = \inserttotalframenumber
+	\progressbar@tmpdim = .5\progressbar@pbwd
+	\multiply\progressbar@tmpdim by \progressbar@tmpcounta
+	\divide\progressbar@tmpdim by \progressbar@tmpcountb
+	\progressbar@tmpdim = 2\progressbar@tmpdim
+	
+    \begin{tikzpicture}%[very thin]
+        % Create the background rectangle
+        \shade[top color = nmbulightgreen, bottom color = nmbulightgreen, middle color = nmbulightgreen](0pt, 0pt) rectangle ++ (\progressbar@pbwd, \progressbar@pbht);
+    
+        % Create the foreground rectangle
+        \shade[top color = nmbugreen, bottom color = nmbugreen, middle color = nmbugreen] (0pt, 0pt) rectangle ++ (\progressbar@tmpdim, \progressbar@pbht);
+    \end{tikzpicture}%
+}
+
+\defbeamertemplate*{footline}{nmbu}[1][]{%
+    \ifbeamercolorempty[bg]{footline}{}{\nointerlineskip}%
+    \setbeamercolor{footlinecolor}{fg = nmbugreen, bg = nmbugreen}
+
+    \setbeamercolor{footlinecolor}{fg = nmbugreen, bg = white}
+
+    \begin{beamercolorbox}[sep = 10pt]{title in head/foot}%
+        \progressbar@progressbar
+        \vskip0.5em
+        \foreach \x in \logos {
+            \includegraphics[height=15px]{\x}
+        } \hfill \insertframenumber
+    \end{beamercolorbox}
+}
+
+\mode<all>

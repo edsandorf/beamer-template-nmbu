@@ -1,0 +1,113 @@
+\documentclass[aspectratio=169,xcolor={rgb}]{beamer}
+
+\usepackage{lmodern}
+\usepackage{graphicx}
+
+\usetheme{nmbu}
+
+% References
+\usepackage[backend = biber, citestyle = authoryear-comp]{biblatex}
+\addbibresource{references.bib}
+
+% Title information
+\title{This is my presentation}
+\subtitle{With a subtitle}
+
+\author{John Lennon \inst{1} \and Paul McCartney \inst{1} \and George Harrison \inst{1} \and Ringo Starr \inst{2} \and Another Author \and Yet another author}
+\institute{\inst{1} First institute \and \inst{2} Second institute}
+
+\date{The Amazing Conference --- \today}
+
+% LOGOS ----
+% This is a comma separated list of logs to include at the bottom of the slide. 
+\newcommand*{\logos} {
+    gfx/logo-nmbu,
+    gfx/logo-aacsb-accredited
+}
+
+% BEGIN PRESENTATION -----
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}{Test}
+  Spicy jalapeno bacon ipsum dolor amet minim nisi in, culpa doner est
+  proident ham hock pork belly duis cow. Sirloin ball tip ea pariatur
+  enim aliqua irure prosciutto kielbasa occaecat porchetta ipsum
+  rump. Salami pork dolore frankfurter. Pancetta tenderloin cow irure
+  occaecat bresaola exercitation in short loin consectetur.
+
+
+
+\end{frame}
+
+\begin{frame}{Math examples and a really really really long headline that hopefully will break accross}
+  \begin{equation}
+    \hat{H}\Psi = E\Psi
+  \end{equation}
+  \begin{equation}
+    \varepsilon \otimes  \Omega
+  \end{equation}
+\end{frame}
+
+\begin{frame}{The MNL model}
+    \begin{equation}
+          \Pr(i_{nit}|\beta) = \frac{\exp(\beta X_{nit})}{\sum_{j=1}^{J}\exp(\beta X_{njt})}
+    \end{equation}
+where
+
+\begin{itemize}
+    \item $\beta$ is a vector of parameters to be estimated
+    \item $X_{nit}$ the levels of the attributes
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Another frame with some equations}
+    \begin{equation*}
+        \begin{split}
+            \int_2^4\frac{1}{x^2}dx&=\int_2^4 x^{-2}dx\\
+            &= \left[\frac{1}{-2+1}x^{-2 + 1}\right]_2^4\\
+            &=\left[-\frac{1}{x}\right]_2^4 \\
+            &= -\frac{1}{4} - (-\frac{1}{2})\\
+            &=-\frac{1}{4} + \frac{1}{2}\\
+            &= \frac{1}{4}
+        \end{split}
+    \end{equation*}
+\end{frame}
+
+\begin{frame}{Test block function}
+  \begin{block}{Standard Block}
+    This is a standard block.
+  \end{block}
+  
+  \begin{exampleblock}{Example Block}
+    This is an example block.
+  \end{exampleblock}
+  
+  \begin{alertblock}{Alert Block}
+    This is an alert block.
+  \end{alertblock}
+\end{frame}
+
+
+\begin{frame}{Text with references}
+
+This is just some random text with references in the footnote \footfullcite{sandorf_exploring_2025} or traditional (\cite{sandorf_ponderous_2022}).
+    
+\end{frame}
+
+\begin{frame}[allowframebreaks]{References}
+    \printbibliography
+\end{frame}
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+
