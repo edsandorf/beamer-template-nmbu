@@ -39,10 +39,16 @@
 \def\progressbar@progressbar{ %
     \progressbar@tmpcounta = \insertframenumber
 	\progressbar@tmpcountb = \inserttotalframenumber
-	\progressbar@tmpdim = .5\progressbar@pbwd
-	\multiply\progressbar@tmpdim by \progressbar@tmpcounta
-	\divide\progressbar@tmpdim by \progressbar@tmpcountb
-	\progressbar@tmpdim = 2\progressbar@tmpdim
+	% Compute bar width = pbwd * framenumber / totalframenumber.
+	% Divide BEFORE multiply to avoid overflowing TeX's max dimension on
+	% longer decks (>~30 frames); guard against a zero total on pass 1.
+	\ifnum\progressbar@tmpcountb>0
+		\progressbar@tmpdim = \progressbar@pbwd
+		\divide\progressbar@tmpdim by \progressbar@tmpcountb
+		\multiply\progressbar@tmpdim by \progressbar@tmpcounta
+	\else
+		\progressbar@tmpdim = 0pt
+	\fi
 	
     \begin{tikzpicture}%[very thin]
         % Create the background rectangle
