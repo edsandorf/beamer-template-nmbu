@@ -96,6 +96,26 @@
     {\centering\includegraphics[#1,width=\textwidth,height=\fullslideheight,keepaspectratio]{#2}\par}%
 }
 
+% \coverimage{<width>}{<height>}{<file>}
+% Fills a fixed box with a photo without distorting it, cropping the overflow
+% evenly on both sides (like CSS object-fit: cover). Useful for rows of photos
+% with different aspect ratios.
+\newsavebox{\nmbu@coverbox}
+\newlength{\nmbu@coverwd}
+\newlength{\nmbu@coverht}
+\newcommand{\coverimage}[3]{%
+    \setlength{\nmbu@coverwd}{#1}\setlength{\nmbu@coverht}{#2}%
+    \sbox{\nmbu@coverbox}{\includegraphics[width=\nmbu@coverwd]{#3}}%
+    \ifdim\ht\nmbu@coverbox<\nmbu@coverht
+        \sbox{\nmbu@coverbox}{\includegraphics[height=\nmbu@coverht]{#3}}%
+    \fi
+    \begin{tikzpicture}
+        \useasboundingbox (0,0) rectangle (\nmbu@coverwd,\nmbu@coverht);
+        \clip (0,0) rectangle (\nmbu@coverwd,\nmbu@coverht);
+        \node[inner sep=0pt] at (0.5\nmbu@coverwd,0.5\nmbu@coverht) {\usebox{\nmbu@coverbox}};
+    \end{tikzpicture}%
+}
+
 \mode<all>
 
 

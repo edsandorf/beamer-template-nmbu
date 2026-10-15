@@ -115,6 +115,20 @@ where
         \includegraphics[height=\fullslideheight]{example-image-a}\par}
 \end{frame}
 
+\begin{frame}{A row of photos with different aspect ratios}
+    \begin{columns}[T]
+        \begin{column}{0.32\textwidth}
+            \coverimage{\linewidth}{3.4cm}{example-image-16x9}
+        \end{column}
+        \begin{column}{0.32\textwidth}
+            \coverimage{\linewidth}{3.4cm}{example-image-golden-upright}
+        \end{column}
+        \begin{column}{0.32\textwidth}
+            \coverimage{\linewidth}{3.4cm}{example-image-1x1}
+        \end{column}
+    \end{columns}
+\end{frame}
+
 \begin{frame}{Text with references}
 
 This is just some random text with references in the footnote \footfullcite{sandorf_exploring_2025} or traditional (\cite{sandorf_ponderous_2022}).
