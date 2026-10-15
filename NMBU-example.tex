@@ -95,6 +95,26 @@ where
 \end{frame}
 
 
+% The example images below ship with the mwe package in TeX Live/MiKTeX.
+\begin{frame}{A full-slide graphic}
+    \fullslidegraphic{example-image-16x9}
+\end{frame}
+
+\begin{frame}{A full-slide graphic still fits when the frame title is long enough to break across two lines}
+    \fullslidegraphic{example-image-golden}
+\end{frame}
+
+\begin{frame}[plain]{A plain frame has no footline, so the graphic can use that space too}
+    \fullslidegraphic{example-image-golden}
+\end{frame}
+
+\begin{frame}{Two graphics side by side at full height}
+    \setfullslideheight
+    {\centering
+        \includegraphics[height=\fullslideheight]{example-image-golden-upright}\hspace{1em}%
+        \includegraphics[height=\fullslideheight]{example-image-a}\par}
+\end{frame}
+
 \begin{frame}{Text with references}
 
 This is just some random text with references in the footnote \footfullcite{sandorf_exploring_2025} or traditional (\cite{sandorf_ponderous_2022}).
