@@ -56,6 +56,28 @@ In your own `.tex` file, in the same directory as the theme files above:
 logo combinations without touching the shared theme files. See `NMBU-example.tex` for a fuller
 worked example, including math, blocks, and citations with `biblatex`.
 
+### Available logos
+
+All logos live in `gfx/` and follow the `logo-<name>` convention. Reference them without the file
+extension.
+
+| Logo                                    | Path                                |
+| --------------------------------------- | ----------------------------------- |
+| NMBU                                    | `gfx/logo-nmbu`                     |
+| AACSB Accredited                        | `gfx/logo-aacsb-accredited`         |
+| European Union (flag)                   | `gfx/logo-eu`                       |
+| Biodiversa+ – European Biodiversity Partnership | `gfx/logo-biodiversa`       |
+| BRAVE (project)                         | `gfx/logo-brave`                    |
+| FCT – Fundação para a Ciência e a Tecnologia (Portugal) | `gfx/logo-fct`      |
+| Formas (Sweden)                         | `gfx/logo-formas`                   |
+| INLAND – Center for Innovative Solutions for Sustainable Land Use and Nature Management | `gfx/logo-inland` |
+| Innovation Fund Denmark                 | `gfx/logo-innovation-fund-denmark`  |
+| The Research Council of Norway          | `gfx/logo-research-council-norway`  |
+| Autonomous Province of Bolzano – South Tyrol | `gfx/logo-bolzano-south-tyrol` |
+
+Logos are cropped tight to their content (no whitespace margin) so they line up at the same height
+in the footline. Crop any new logo the same way, and avoid spaces in file names.
+
 ## License
 
 TODO — confirm the license terms of the upstream [Beamer-NMBU](https://github.com/Eivysaur/Beamer-NMBU)
