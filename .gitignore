@@ -16,3 +16,6 @@
 *.synctex.gz
 *.toc
 *.vrb
+
+# Compiled presentations (root only, so vector logos in gfx/ can still be PDFs)
+/*.pdf

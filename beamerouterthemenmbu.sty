@@ -61,16 +61,15 @@
 
 \defbeamertemplate*{footline}{nmbu}[1][]{%
     \ifbeamercolorempty[bg]{footline}{}{\nointerlineskip}%
-    \setbeamercolor{footlinecolor}{fg = nmbugreen, bg = nmbugreen}
-
-    \setbeamercolor{footlinecolor}{fg = nmbugreen, bg = white}
-
     \begin{beamercolorbox}[sep = 10pt]{title in head/foot}%
         \progressbar@progressbar
         \vskip0.5em
-        \foreach \x in \logos {
-            \includegraphics[height=15px]{\x}
-        } \hfill \insertframenumber
+        % \logos is defined per-presentation; skip the logos if it isn't
+        \ifdefined\logos
+            \foreach \x in \logos {
+                \includegraphics[height=15px]{\x}
+            }
+        \fi \hfill \insertframenumber
     \end{beamercolorbox}
 }
 
