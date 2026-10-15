@@ -57,7 +57,7 @@ In your own `.tex` file, in the same directory as the theme files above:
 logo combinations without touching the shared theme files. See `NMBU-example.tex` for a fuller
 worked example, including math, blocks, and citations with `biblatex`.
 
-### Full-slide figures
+### Full-slide figures and images
 
 LaTeX has no "fill the remaining space" option for graphics. In Beamer, the frame title sits inside
 the content area, so the space left for a figure depends on how many lines the title wraps to. The
@@ -77,6 +77,9 @@ theme measures this for you:
 {\centering
     \includegraphics[height=\fullslideheight]{figs/a.png}\hspace{1em}%
     \includegraphics[height=\fullslideheight]{figs/b.png}\par}
+
+% A row of photos with different aspect ratios: fill equal boxes, cropping instead of distorting
+\coverimage{\linewidth}{3.4cm}{figs/photo.jpg}
 ```
 
 - `\fullslidegraphic` keeps the aspect ratio and is meant as the only content of a frame. Inside a
