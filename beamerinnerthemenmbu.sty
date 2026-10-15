@@ -55,6 +55,47 @@
     \vfill
 }
 
+% ----
+% FULL-SLIDE GRAPHICS
+% ----
+% \fullslideheight: the height left for content below the frame title.
+% Beamer only works this out (\beamer@frametextheight) after the frame body
+% has been typeset, so \setfullslideheight repeats beamer's calculation for
+% the current frame:
+%   - start from \textheight, which inside a frame already excludes the
+%     headline and footline, or from \paperheight on [plain] frames;
+%   - subtract the frame title, built exactly as beamer builds it, so titles
+%     that wrap and subtitles are accounted for;
+%   - subtract the top skip (non-zero on [t] frames) and, except on [plain]
+%     frames, the \lineskip TeX inserts above a tall first line;
+%   - keep 0.25pt spare so rounding in graphicx never causes an overflow.
+\newlength{\fullslideheight}
+\newcommand{\setfullslideheight}{%
+    \ifbeamer@plainframe
+        \fullslideheight=\paperheight
+    \else
+        \fullslideheight=\dimexpr\textheight-\lineskip\relax
+    \fi
+    \ifx\insertframetitle\@empty\else
+        \setbox\z@\vbox{\vbox{}{\parskip\z@\usebeamertemplate***{frametitle}\vskip0.25em}}%
+        \advance\fullslideheight by -\ht\z@
+        \advance\fullslideheight by -\dp\z@
+    \fi
+    \advance\fullslideheight by -\dimexpr\beamer@frametopskip\relax
+    \advance\fullslideheight by -0.25pt
+}
+
+% \fullslidegraphic[<graphicx options>]{<file>}
+% Scales a graphic to the largest size that fits below the frame title,
+% above the footline and within the side margins, keeping its aspect ratio.
+% Meant as the only content of a frame. Inside a column it fills the column
+% width. Use the optional argument for e.g. trim=<l b r t>, clip to cut away
+% whitespace baked into the image file.
+\newcommand{\fullslidegraphic}[2][]{%
+    \setfullslideheight
+    {\centering\includegraphics[#1,width=\textwidth,height=\fullslideheight,keepaspectratio]{#2}\par}%
+}
+
 \mode<all>
 
 
