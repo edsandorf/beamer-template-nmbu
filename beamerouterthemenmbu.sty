@@ -37,26 +37,17 @@
 
 %	Now we create the progressbar
 \def\progressbar@progressbar{ %
-	% \relax ends each number; without it TeX keeps scanning for digits and
-	% expands the \ifnum below before the assignment has happened.
-	\progressbar@tmpcounta = \insertframenumber\relax
-	% Measure progress against the main talk only: \insertmainframenumber is
-	% the frame count before \appendix (the full total if there is none).
-	% Older beamer versions lack it, so fall back to the total.
-	\ifdefined\insertmainframenumber
-		\progressbar@tmpcountb = \insertmainframenumber\relax
-	\else
-		\progressbar@tmpcountb = \inserttotalframenumber\relax
-	\fi
-	% Compute bar width = pbwd * framenumber / mainframenumber.
+    \progressbar@tmpcounta = \insertframenumber
+	% Frames before \appendix only; \relax stops TeX scanning past the number
+	\progressbar@tmpcountb = \insertmainframenumber\relax
+	% Compute bar width = pbwd * framenumber / totalframenumber.
 	% Divide BEFORE multiply to avoid overflowing TeX's max dimension on
-	% longer decks (>~30 frames); guard against a zero total, and cap at
-	% full width so appendix frames (and a stale total on the first pass)
-	% show a full bar instead of overrunning it.
+	% longer decks (>~30 frames); guard against a zero total on pass 1.
 	\ifnum\progressbar@tmpcountb>0
 		\progressbar@tmpdim = \progressbar@pbwd
 		\divide\progressbar@tmpdim by \progressbar@tmpcountb
 		\multiply\progressbar@tmpdim by \progressbar@tmpcounta
+		% Full bar in the appendix
 		\ifdim\progressbar@tmpdim>\progressbar@pbwd
 			\progressbar@tmpdim = \progressbar@pbwd
 		\fi
