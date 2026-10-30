@@ -105,6 +105,7 @@ extension.
 | Formas (Sweden)                         | `gfx/logo-formas`                   |
 | INLAND – Center for Innovative Solutions for Sustainable Land Use and Nature Management | `gfx/logo-inland` |
 | Innovation Fund Denmark                 | `gfx/logo-innovation-fund-denmark`  |
+| NMBU One Health Forum                   | `gfx/logo-one-health-forum`         |
 | The Research Council of Norway          | `gfx/logo-research-council-norway`  |
 | Autonomous Province of Bolzano – South Tyrol | `gfx/logo-bolzano-south-tyrol` |
 
