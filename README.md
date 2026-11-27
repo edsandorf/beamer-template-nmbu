@@ -5,7 +5,7 @@ lectures and presentations. Based on [Beamer-NMBU by Eivysaur](https://github.co
 
 ## Prerequisites
 
-A TeX distribution (TeX Live, MacTeX, MiKTeX) with:
+Quarto 1.6 or later for the Quarto format, and a TeX distribution (TeX Live, MacTeX, MiKTeX) with:
 
 - `tikz`, `calc`, `lmodern`, `graphicx` — used by the theme itself.
 - `mwe` — provides the placeholder images used in the example deck (included in TeX Live and MiKTeX).
@@ -15,29 +15,73 @@ A TeX distribution (TeX Live, MacTeX, MiKTeX) with:
   local editors like TeXstudio/VS Code's LaTeX Workshop usually need `biber` picked explicitly
   as the bibliography tool, not the older `bibtex`).
 
-## What to deploy
+## Theme files
 
-Only these files are the actual theme — copy them together as a unit into wherever you're writing
-a presentation (a teaching lecture folder, a `Projects/Outputs/Presentations/<slug>/` folder):
+The theme lives in `_extensions/nmbu/`: the five `beamer*themenmbu.sty` files and the logos in
+`gfx/`. The same files serve both Quarto and plain LaTeX. `NMBU-example-quarto.qmd`, `NMBU-example-latex.tex`,
+`references.bib` and `figs/` are examples only. The two example decks show the same slides in the same
+order (the Quarto deck adds callouts at the end), so their PDFs can be compared page by page. The
+plots in the LaTeX deck come from `figs/make-figures.R`, which uses the same code as the Quarto deck.
 
+## Quarto
+
+Install the extension in a Quarto project, pinned to a release:
+
+```bash
+quarto add edsandorf/beamer-template-nmbu@v1.0.0
 ```
-beamerthemenmbu.sty
-beamercolorthemenmbu.sty
-beamerfontthemenmbu.sty
-beamerinnerthemenmbu.sty
-beamerouterthemenmbu.sty
-gfx/
+
+This creates `_extensions/edsandorf/nmbu/`. Commit that folder, so every render uses the same
+theme. Update deliberately, against a tag:
+
+```bash
+quarto update extension edsandorf/beamer-template-nmbu@v1.1.0
 ```
 
-`NMBU-example.tex` and `references.bib` are demo/reference material only — they show the theme in
-use, but don't need to ship alongside it.
+Use the `nmbu-beamer` format:
 
-## Usage
+```yaml
+---
+title: My lecture
+author: Jane Doe
+format:
+  nmbu-beamer:
+    logos:
+      - gfx/logo-nmbu
+      - gfx/logo-aacsb-accredited
+---
+```
 
-In your own `.tex` file, in the same directory as the theme files above:
+The format sets `pdf-engine: pdflatex` (equations match the LaTeX decks), a 16:9 aspect ratio and
+no automatic section title slides. The theme is loaded straight from the extension folder, so a
+render leaves no theme files next to the document. Images and R figures are scaled to fit below the frame title,
+also when the title wraps to two lines, and long lines in code and code output wrap. The theme loads
+before `include-in-header`, so a deck can override theme colors there.
+
+| Option        | Default             | Meaning                                                           |
+| ------------- | ------------------- | ----------------------------------------------------------------- |
+| `logos`       | `[gfx/logo-nmbu]`   | Footline logos, without file extension. `gfx/…` paths resolve to the extension's logos; other paths are relative to the document. A list replaces the default; `false` shows no logos. |
+| `beameroption`| none                | E.g. `show notes on second screen=right` to show speaker notes.   |
+| `fig-width`, `fig-height` | `5.5`, `2.6` | R figure size in inches: the area below a one-line frame title, so plot text matches slide text. Use e.g. `fig-width: 3` in a half-width column. |
+
+Authors' affiliations aren't shown on the title page; use `institute:` instead. Speaker notes go in `::: notes` divs and are hidden unless `beameroption` shows them. A `###`
+heading inside a slide makes a block; add `{.example}` or `{.alert}` for the other block colors.
+Callouts use NMBU colors: note blue, tip green, important red, warning yellow, caution brown.
+The LaTeX helpers below work as raw LaTeX in `.qmd` files. See `NMBU-example-quarto.qmd` for a worked example.
+
+## Plain LaTeX
+
+`\usetheme{nmbu}` needs to find the `.sty` files, and the footline needs to find the logos. Point
+LaTeX at the extension folder before loading the theme:
 
 ```latex
 \documentclass[aspectratio=169]{beamer}
+
+\makeatletter
+\def\input@path{{_extensions/edsandorf/nmbu/}}
+\makeatother
+\graphicspath{{_extensions/edsandorf/nmbu/}}
+
 \usetheme{nmbu}
 
 % Comma-separated list of logos shown in the footline (no file extension)
@@ -53,8 +97,12 @@ In your own `.tex` file, in the same directory as the theme files above:
 \end{document}
 ```
 
-`\logos` is defined per-presentation, not inside the theme — so different decks can show different
-logo combinations without touching the shared theme files. See `NMBU-example.tex` for a fuller
+Paths are relative to the `.tex` file (`_extensions/nmbu/` inside this repo, as in
+`NMBU-example-latex.tex`). Alternatively, copy the `.sty` files and `gfx/` next to the `.tex` file and
+drop the two path lines.
+
+`\logos` is defined per presentation, not inside the theme, so different decks can show different
+logo combinations without touching the shared theme files. See `NMBU-example-latex.tex` for a fuller
 worked example, including math, blocks, and citations with `biblatex`.
 
 ### Full-slide figures and images
@@ -91,7 +139,7 @@ theme measures this for you:
 
 ### Available logos
 
-All logos live in `gfx/` and follow the `logo-<name>` convention. Reference them without the file
+All logos live in `_extensions/nmbu/gfx/` and follow the `logo-<name>` convention. Reference them without the file
 extension.
 
 | Logo                                    | Path                                |

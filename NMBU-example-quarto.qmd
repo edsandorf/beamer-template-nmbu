@@ -1,0 +1,217 @@
+---
+# The slides match NMBU-example-latex.tex one to one, so the two decks can be
+# compared page by page. Callouts have no LaTeX counterpart and come last.
+# The example images ship with the mwe package in TeX Live/MiKTeX.
+title: This is my presentation
+subtitle: With a subtitle
+author:
+  - John Lennon \inst{1}
+  - Paul McCartney \inst{1}
+  - George Harrison \inst{1}
+  - Ringo Starr \inst{2}
+  - Another Author
+  - Yet another author
+institute:
+  - \inst{1} First institute
+  - \inst{2} Second institute
+date: 2026-11-27
+format:
+  nmbu-beamer:
+    logos:
+      - gfx/logo-nmbu
+      - gfx/logo-aacsb-accredited
+bibliography: references.bib
+cite-method: biblatex
+biblatexoptions: citestyle=authoryear-comp
+biblio-title: References
+execute:
+  echo: false
+---
+
+## Outline
+
+\tableofcontents
+
+# Introduction
+
+## Informative titles state the point of the slide
+
+- Minimal text on the slide
+- The interpretation goes in the speaker notes
+
+::: notes
+Speaker notes are hidden in the PDF by default. Show them with
+`beameroption: show notes on second screen=right`.
+:::
+
+## Math examples and a really really really long headline that hopefully will break across
+
+$$
+\hat{H}\Psi = E\Psi
+$$ {#eq-schrodinger}
+
+$$
+\varepsilon \otimes \Omega
+$$ {#eq-otimes}
+
+# Methods
+
+## Outline
+
+\tableofcontents[currentsection]
+
+## The MNL model
+
+$$
+\Pr(i_{nit} \mid \beta) = \frac{\exp(\beta X_{nit})}{\sum_{j=1}^{J}\exp(\beta X_{njt})}
+$$
+
+where
+
+- $\beta$ is a vector of parameters to be estimated
+- $X_{nit}$ are the levels of the attributes
+
+## Another frame with some equations
+
+$$
+\begin{split}
+  \int_2^4\frac{1}{x^2}dx &= \int_2^4 x^{-2}dx\\
+  &= \left[\frac{1}{-2+1}x^{-2 + 1}\right]_2^4\\
+  &= \left[-\frac{1}{x}\right]_2^4\\
+  &= -\tfrac{1}{4} - \left(-\tfrac{1}{2}\right)\\
+  &= -\tfrac{1}{4} + \tfrac{1}{2}\\
+  &= \tfrac{1}{4}
+\end{split}
+$$
+
+## Blocks
+
+### Standard block
+
+This is a standard block.
+
+### Example block {.example}
+
+This is an example block.
+
+### Alert block {.alert}
+
+This is an alert block.
+
+# Graphics
+
+## A full-slide graphic
+
+\fullslidegraphic{example-image-16x9}
+
+## A full-slide graphic still fits when the frame title is long enough to break across two lines
+
+\fullslidegraphic{example-image-golden}
+
+## A plain frame has no footline, so the graphic can use that space too {.plain}
+
+\fullslidegraphic{example-image-golden}
+
+## Two graphics side by side at full height
+
+```{=latex}
+\setfullslideheight
+{\centering
+  \includegraphics[height=\fullslideheight]{example-image-golden-upright}\hspace{1em}%
+  \includegraphics[height=\fullslideheight]{example-image-a}\par}
+```
+
+## A row of photos with different aspect ratios
+
+:::: columns
+::: {.column width="32%"}
+\coverimage{\linewidth}{3.4cm}{example-image-16x9}
+:::
+::: {.column width="32%"}
+\coverimage{\linewidth}{3.4cm}{example-image-golden-upright}
+:::
+::: {.column width="32%"}
+\coverimage{\linewidth}{3.4cm}{example-image-1x1}
+:::
+::::
+
+# Results from R
+
+## Code shown on a slide
+
+```{r}
+#| echo: true
+model <- lm(dist ~ speed, data = cars)
+coef(model)
+```
+
+## Regression output as a table
+
+```{r}
+model <- lm(dist ~ speed, data = cars)
+estimates <- summary(model)$coefficients
+knitr::kable(estimates, digits = 3)
+```
+
+## Stopping distance rises with speed
+
+```{r}
+library(ggplot2)
+ggplot(cars, aes(speed, dist)) +
+  geom_point() +
+  geom_smooth(method = "lm", formula = y ~ x) +
+  labs(x = "Speed (mph)", y = "Stopping distance (ft)") +
+  theme_minimal()
+```
+
+## A plot next to text
+
+:::: {.columns align=center}
+::: {.column width="55%"}
+```{r}
+#| fig-width: 3
+ggplot(mtcars, aes(wt, mpg)) +
+  geom_point() +
+  labs(x = "Weight (1000 lbs)", y = "Miles per gallon") +
+  theme_minimal()
+```
+:::
+::: {.column width="45%"}
+- Heavier cars drive fewer miles per gallon
+:::
+::::
+
+## Text with references
+
+Some random text with references in the footnote \footfullcite{sandorf_exploring_2025} or in
+parentheses [@sandorf_ponderous_2022].
+
+# Quarto only
+
+## Callouts
+
+::: callout-note
+A note.
+:::
+
+::: callout-tip
+A tip.
+:::
+
+::: callout-important
+Something important.
+:::
+
+## More callouts
+
+::: callout-warning
+A warning.
+:::
+
+::: callout-caution
+A caution.
+:::
+
+::: {.callout-note appearance="simple"}
+A simple note, without a title.
+:::

@@ -1,0 +1,24 @@
+title: NMBU Beamer
+author: Erlend Dancke Sandorf
+version: 1.0.0
+quarto-required: ">=1.6.0"
+contributes:
+  formats:
+    beamer:
+      pdf-engine: pdflatex
+      aspectratio: 169
+      theme: nmbu
+      slide-level: 2
+      section-titles: false
+      # R figures at the size of the area below a one-line frame title, so
+      # their text matches the slide text; `pandocbounded` shrinks them when
+      # the title is longer.
+      fig-width: 5.5
+      fig-height: 2.6
+      fig-align: center
+      template-partials:
+        - doc-class.tex
+      include-in-header:
+        - nmbu-quarto.tex
+      filters:
+        - nmbu.lua
