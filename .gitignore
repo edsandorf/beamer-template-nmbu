@@ -19,3 +19,6 @@
 
 # Compiled presentations (root only, so vector logos in gfx/ can still be PDFs)
 /*.pdf
+
+# Quarto render leftovers (figures from standalone renders)
+*_files/

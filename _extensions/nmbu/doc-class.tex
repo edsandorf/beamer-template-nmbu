@@ -1,0 +1,27 @@
+$-- Copy of Quarto's beamer doc-class.tex partial, plus the lines at the end
+$-- that let LaTeX find the theme and logos in the extension folder before
+$-- \usetheme{nmbu} runs. `nmbu-path` is set by nmbu.lua.
+\documentclass[
+$if(fontsize)$
+  $fontsize$,
+$endif$
+  ignorenonframetext,
+$if(handout)$
+  handout,
+$endif$
+$if(aspectratio)$
+  aspectratio=$aspectratio$,
+$endif$
+$if(babel-lang)$
+  $babel-lang$,
+$endif$
+$for(classoption)$
+  $classoption$$sep$,
+$endfor$
+]{$documentclass$}
+$if(nmbu-path)$
+\makeatletter
+\def\input@path{{$nmbu-path$}}
+\makeatother
+\graphicspath{{$nmbu-path$}}
+$endif$
