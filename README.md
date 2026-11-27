@@ -162,6 +162,15 @@ in the footline. Crop any new logo the same way, and avoid spaces in file names.
 
 ## License
 
-TODO — confirm the license terms of the upstream [Beamer-NMBU](https://github.com/Eivysaur/Beamer-NMBU)
-project this is based on, and add a `LICENSE` file here reflecting them before sharing this
-repository with others.
+The code in this repository is licensed under the [MIT License](LICENSE), with these exceptions:
+
+- **Progress bar:** the progress-bar code in `_extensions/nmbu/beamerouterthemenmbu.sty` is adapted
+  from an answer to ["Progress bar for latex-beamer"](https://tex.stackexchange.com/q/59742) on
+  TeX.StackExchange and stays under
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), as marked in the file.
+- **Logos:** the logos in `_extensions/nmbu/gfx/` belong to their owners (NMBU, AACSB, funders and
+  partners) and are not covered by the MIT License. Use them according to each owner's rules.
+
+The theme started from [Beamer-NMBU by Eivysaur](https://github.com/Eivysaur/Beamer-NMBU) and still
+follows its choice of colors for frame titles, lists and blocks. The NMBU color values come from
+[NMBU's graphical profile](https://design.nmbu.no/artikler/node/2970).

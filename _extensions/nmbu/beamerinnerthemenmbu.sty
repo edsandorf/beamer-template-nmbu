@@ -11,17 +11,6 @@
 \mode<presentation>
 
 % ----
-% BACKGROUND
-% ----
-% Background hook, currently just a bounding box. Extend inside the tikzpicture
-% if a per-slide background/watermark is ever needed.
-\setbeamertemplate{background}{
-    \begin{tikzpicture}
-        \useasboundingbox (0, 0) rectangle(\the\paperwidth, \the\paperheight);
-    \end{tikzpicture}
-}
-
-% ----
 % OUTLINE
 % ----
 % Show shaded sections in their own colour (section in toc shaded) instead
